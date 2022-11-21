@@ -27,7 +27,7 @@ description: >-                        # used by seo meta and the atom feed
   This is Musings on AI, a newsletter about I post weekly newsletters on the hottest Musings on Artificial Intelligence.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://raahuldutta.github.io'
+url: ''
 
 github:
   username: raahuldutta             # change to your github username
