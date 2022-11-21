@@ -1,6 +1,6 @@
 ---
 title: How to Select the Right GPU Instance for Your Team on AWS?
-author: Raahul Dutta
+author: raahul
 date: 2022-11-19 18:32:00 -0500
 ---
 
