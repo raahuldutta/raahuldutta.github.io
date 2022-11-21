@@ -924,6 +924,261 @@
     
 
   
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+        
+
+    
+      
+
+        <!-- Add CDN URL -->
+        
+
+        <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+      <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+    <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+    <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+        
+
+    
+      
+
+        <!-- Add CDN URL -->
+        
+
+        <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+      <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+    <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+    <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+        
+
+    
+      
+
+        <!-- Add CDN URL -->
+        
+
+        <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+      <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+    <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+    <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
 
   
 
@@ -950,6 +1205,18 @@
       
         
         
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
       
 
       
@@ -1136,6 +1403,65 @@
 
 
 
+  
+  
+
+  
+
+    
+      
+      
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+
+    
+
+    
+    
+
+    
+
+  
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+
+    
+
+    
+    
+
+    
+
+  
+
+  
+
+
+
 <!-- return -->
 
 <h1 data-toc-skip>Model Deployment with KServe and KServe Features</h1>
@@ -1208,8 +1534,8 @@
 
 <!-- return element -->
 <span class="readtime" data-toggle="tooltip" data-placement="bottom"
-  title="1179 words">
-  <em>6 min</em> read</span>
+  title="1506 words">
+  <em>8 min</em> read</span>
 
     </div>
 
@@ -1241,6 +1567,10 @@
   <li>Simple and Pluggable Production Serving including Prediction, pre/post-processing, monitoring, and explainable.</li>
   <li>Advanced deployments with Canary rollout, transformers, experiments, ensembles, and Model-Mesh.</li>
 </ul>
+
+<p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/kserve1.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+
+<p>This image is not related with Kserve - Got the picture from reddit, its not an actual view.The picture was generated with the diffusion model.</p>
 
 <h2 id="starting-kserve-on-eks"><span class="mr-2">Starting KServe on EKS</span><a href="#starting-kserve-on-eks" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1407,9 +1737,22 @@ We explored PVC ( Persistent Volume Claim) and S3 to store the models. The creat
 </pre></td><td class="rouge-code"><pre><span class="o">{</span><span class="s2">"id"</span>: <span class="s2">"d3b15cad-50a2-4eaf-80ce-8b0a428bd298"</span>, <span class="s2">"model_name"</span>: <span class="s2">"SciBERTSeqClassification"</span>, <span class="s2">"model_version"</span>: <span class="s2">"1.0"</span>, <span class="s2">"outputs"</span>: <span class="o">[{</span><span class="s2">"name"</span>: <span class="s2">"explain"</span>, <span class="s2">"shape"</span>: <span class="o">[]</span>, <span class="s2">"datatype"</span>: <span class="s2">"BYTES"</span>, <span class="s2">"data"</span>: <span class="o">[{</span><span class="s2">"words"</span>: <span class="o">[</span><span class="s2">"[CLS]"</span>, <span class="s2">"Risk"</span>, <span class="s2">"assessment"</span>, <span class="s2">"implications"</span>, <span class="s2">"of"</span>, <span class="s2">"site-specific"</span>, <span class="s2">"oral"</span>, <span class="s2">"relative"</span>, <span class="s2">"bioavailability"</span>, <span class="s2">"."</span>, <span class="s2">"[SEP]"</span><span class="o">]</span>, <span class="s2">"importances"</span>: <span class="o">[</span>0.0, <span class="nt">-0</span>.43571255624310423, <span class="nt">-0</span>.11062097534384648, 0.11323803203829622, 0.05438679692935377, <span class="nt">-0</span>.11364841625009202, 0.15214504085858935, <span class="nt">-0</span>.0013061684457894148, 0.05712844103997178, <span class="nt">-0</span>.02296408323390218, 0.1937543236757826, <span class="nt">-0</span>.12138265438655091, 0.20713335609474381, <span class="nt">-0</span>.8044260616647264, 0.0], <span class="s2">"delta"</span>: <span class="nt">-0</span>.019047775223331675<span class="o">}]}]}</span>
 </pre></td></tr></tbody></table></code></div></div>
 
+<blockquote class="prompt-tip"><div>
+  <p>The first BERT model has been deployed. Let’s take a break. 
+Afterward, we will learn about some of the important features of KServe.</p>
+</div></blockquote>
+
+<blockquote class="prompt-tip"><div>
+  <p>I hope you have enjoyed the Coffee. I read somewhere a nice coffee joke - 
+<em>What’s the best Beatles’ song to play at a coffee shop? Latte Be!</em>
+Let’s try some important features of KServe.</p>
+</div></blockquote>
+
 <h2 id="inference-batching"><span class="mr-2">Inference Batching</span><a href="#inference-batching" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>KServe supports batch prediction for any ML framework (TensorFlow, PyTorch, …) without decreasing the performance.</p>
+
+<p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/ib.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
 
 <p>This batcher is implemented in the KServe model agent sidecar, so the requests first hit the agent sidecar, when a batch prediction is triggered the request is then sent to the model server container for inference.</p>
 
@@ -1454,6 +1797,67 @@ We explored PVC ( Persistent Volume Claim) and S3 to store the models. The creat
       <span class="na">protocolVersion</span><span class="pi">:</span> <span class="s">v2</span>
       <span class="na">storageUri</span><span class="pi">:</span> <span class="s">pvc://task-pv-claim/models</span>
 </pre></td></tr></tbody></table></code></div></div>
+
+<p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/kserve2.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+
+<p>This image is not related with Kserve - Got the picture from reddit, its not an actual view.The picture was generated with the diffusion model.</p>
+
+<h2 id="canary-rollout"><span class="mr-2">Canary Rollout</span><a href="#canary-rollout" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Canary rollout is a deployment strategy when you can release a new version of model to a small percent of the production traffic.
+Lets deploy the below yaml files on your cluster with the new version.</p>
+
+<p>apiVersion: “serving.kserve.io/v1beta1”
+kind: “InferenceService”
+metadata:
+  name: “torchserve”
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: pytorch
+      protocolVersion: v2<br />
+      storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2</p>
+
+<p>apiVersion: “serving.kserve.io/v1beta1”
+kind: “InferenceService”
+metadata:
+  name: “torchserve”
+spec:
+  predictor:
+    canaryTrafficPercent: 20
+    model:
+      modelFormat:
+        name: pytorch
+      protocolVersion: v2<br />
+      storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2</p>
+
+<p>kubectl get revisions -l serving.kserve.io/inferenceservice=torchserve
+NAME                                 CONFIG NAME                    K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
+torchserve-predictor-default-00001   torchserve-predictor-default                      1            True             1                 1
+torchserve-predictor-default-00002   torchserve-predictor-default                      2            True             1                 1</p>
+
+<p>kubectl get pods -l serving.kserve.io/inferenceservice=torchserve
+NAME                                                             READY   STATUS    RESTARTS   AGE
+torchserve-predictor-default-00001-deployment-7d99979c99-p49gk   2/2     Running   0          28m
+torchserve-predictor-default-00002-deployment-c6fcc65dd-rjknq    2/2     Running   0          3m37s</p>
+
+<p>SERVICE_HOSTNAME=$(kubectl get inferenceservice torchserve -o jsonpath=’{.status.url}’ | cut -d “/” -f 3)
+CLUSTER_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath=’{.status.loadBalancer.ingress[0].hostname}’)
+for i in {1..10}; do curl -H “Host: ${SERVICE_HOSTNAME}” http://${CLUSTER_IP}/v2/models/mnist/infer -d @./canary_input.json; done</p>
+
+<p>{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080</p>
+<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>
+<p>Handling connection for 8080</p>
+<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>
+<p>Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080
+{“predictions”: [2]}Handling connection for 8080</p>
 
 <h2 id="logging"><span class="mr-2">Logging</span><a href="#logging" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1525,10 +1929,13 @@ kubectl <span class="nt">--namespace</span> default port-forward <span class="nv
 
 <h2 id="auto-scaling"><span class="mr-2">Auto-Scaling</span><a href="#auto-scaling" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>KServe supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes’ Horizontal Pod Autoscaler (HPA).
-We can configure InferenceService with field containerConcurrency for a hard limit. The hard limit is an enforced upper bound. If concurrency reaches the hard limit, surplus requests will be buffered and must wait until enough capacity is free to execute the requests.
-We configure InferenceService with annotation autoscaling.knative.dev/target for a soft limit. The soft limit is a targeted limit rather than a strictly enforced bound, particularly if there is a sudden burst of requests, this value can be exceeded.
-I deployed <code class="language-plaintext highlighter-rouge">triton.yaml</code> on EKS cluster to explore the Autoscaling and I used <code class="language-plaintext highlighter-rouge">hey</code> to send loads.</p>
+<p>KServe supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes’ Horizontal Pod Autoscaler (HPA).</p>
+
+<p>We can configure InferenceService with field containerConcurrency for a hard limit. The hard limit is an enforced upper bound. If concurrency reaches the hard limit, surplus requests will be buffered and must wait until enough capacity is free to execute the requests.</p>
+
+<p>We configure InferenceService with annotation autoscaling.knative.dev/target for a soft limit. The soft limit is a targeted limit rather than a strictly enforced bound, particularly if there is a sudden burst of requests, this value can be exceeded.</p>
+
+<p>I deployed <code class="language-plaintext highlighter-rouge">triton.yaml</code> on EKS cluster to explore the Autoscaling and I used <code class="language-plaintext highlighter-rouge">hey</code> to send loads.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="code-header">
         <span data-label-text="YAML"><i class="fas fa-code small"></i></span>
@@ -1631,23 +2038,23 @@ hey <span class="nt">-m</span> POST <span class="nt">-z</span> 60s <span class="
 <ul>
   <li>
     <p>Before the “Hey” Execution - Single pod of transformer and predictor is live.
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as1.jpeg" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as1.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
   </li>
   <li>
     <p>After 2 Seconds - pods are warming up
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as2.jpeg" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as2.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
   </li>
   <li>
     <p>After 30 Seconds - pods are running
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as3.jpeg" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as3.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
   </li>
   <li>
     <p>After 70 Seconds - bomberding done. pods are dying
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as4.jpeg" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as4.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
   </li>
   <li>
     <p>After 90 Seconds - back square 1
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as5.jpeg" alt="kserve" width="616" height="557" data-proofer-ignore></p>
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 616 557'%3E%3C/svg%3E" data-src="https://raw.githubusercontent.com/raahuldutta/musingsonai_img/master/posts/202201119/as5.png" alt="kserve" width="616" height="557" data-proofer-ignore></p>
   </li>
 </ul>
 

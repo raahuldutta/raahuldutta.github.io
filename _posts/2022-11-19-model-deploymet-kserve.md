@@ -24,6 +24,10 @@ And the Answer is KServe.
 - Simple and Pluggable Production Serving including Prediction, pre/post-processing, monitoring, and explainable.
 - Advanced deployments with Canary rollout, transformers, experiments, ensembles, and Model-Mesh.
 
+![kserve](/posts/202201119/kserve1.png){: width="616" height="557"}
+
+This image is not related with Kserve - Got the picture from reddit, its not an actual view.The picture was generated with the diffusion model.
+
 
 ## Starting KServe on EKS
 
@@ -73,6 +77,7 @@ The Version Matrix
 | Cert Manager Version              | 1.14.0   |
 | Istio | Giovanni Rovelli |
 | Kserve | 0.9 |
+
 
 ## Prerequisite: Model Training
 
@@ -126,14 +131,21 @@ Expected Output
 {"id": "d3b15cad-50a2-4eaf-80ce-8b0a428bd298", "model_name": "SciBERTSeqClassification", "model_version": "1.0", "outputs": [{"name": "explain", "shape": [], "datatype": "BYTES", "data": [{"words": ["[CLS]", "Risk", "assessment", "implications", "of", "site-specific", "oral", "relative", "bioavailability", ".", "[SEP]"], "importances": [0.0, -0.43571255624310423, -0.11062097534384648, 0.11323803203829622, 0.05438679692935377, -0.11364841625009202, 0.15214504085858935, -0.0013061684457894148, 0.05712844103997178, -0.02296408323390218, 0.1937543236757826, -0.12138265438655091, 0.20713335609474381, -0.8044260616647264, 0.0], "delta": -0.019047775223331675}]}]}
 ```
 
+> The first BERT model has been deployed. Let's take a break. 
+Afterward, we will learn about some of the important features of KServe.
+{: .prompt-tip }
 
-
-
+> I hope you have enjoyed the Coffee. I read somewhere a nice coffee joke - 
+_What’s the best Beatles’ song to play at a coffee shop? Latte Be!_
+Let's try some important features of KServe.
+{: .prompt-tip }
 
 
 ## Inference Batching
 
 KServe supports batch prediction for any ML framework (TensorFlow, PyTorch, ...) without decreasing the performance.
+
+![kserve](/posts/202201119/ib.png){: width="616" height="557"}
 
 This batcher is implemented in the KServe model agent sidecar, so the requests first hit the agent sidecar, when a batch prediction is triggered the request is then sent to the model server container for inference.
 
@@ -161,6 +173,69 @@ spec:
       storageUri: pvc://task-pv-claim/models
 ```
 
+
+![kserve](/posts/202201119/kserve2.png){: width="616" height="557"}
+
+This image is not related with Kserve - Got the picture from reddit, its not an actual view.The picture was generated with the diffusion model.
+
+## Canary Rollout
+
+Canary rollout is a deployment strategy when you can release a new version of model to a small percent of the production traffic.
+Lets deploy the below yaml files on your cluster with the new version.
+
+
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "torchserve"
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: pytorch
+      protocolVersion: v2  
+      storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2
+
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "torchserve"
+spec:
+  predictor:
+    canaryTrafficPercent: 20
+    model:
+      modelFormat:
+        name: pytorch
+      protocolVersion: v2  
+      storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2
+
+
+
+kubectl get revisions -l serving.kserve.io/inferenceservice=torchserve
+NAME                                 CONFIG NAME                    K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
+torchserve-predictor-default-00001   torchserve-predictor-default                      1            True             1                 1
+torchserve-predictor-default-00002   torchserve-predictor-default                      2            True             1                 1
+
+kubectl get pods -l serving.kserve.io/inferenceservice=torchserve
+NAME                                                             READY   STATUS    RESTARTS   AGE
+torchserve-predictor-default-00001-deployment-7d99979c99-p49gk   2/2     Running   0          28m
+torchserve-predictor-default-00002-deployment-c6fcc65dd-rjknq    2/2     Running   0          3m37s
+
+
+SERVICE_HOSTNAME=$(kubectl get inferenceservice torchserve -o jsonpath='{.status.url}' | cut -d "/" -f 3)
+CLUSTER_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+for i in {1..10}; do curl -H "Host: ${SERVICE_HOSTNAME}" http://${CLUSTER_IP}/v2/models/mnist/infer -d @./canary_input.json; done
+
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>Handling connection for 8080
+<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
+{"predictions": [2]}Handling connection for 8080
 
 ## Logging
 
@@ -206,8 +281,11 @@ kubectl --namespace default port-forward $POD_NAME 3000
 ## Auto-Scaling
 
 KServe supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes’ Horizontal Pod Autoscaler (HPA).
+
 We can configure InferenceService with field containerConcurrency for a hard limit. The hard limit is an enforced upper bound. If concurrency reaches the hard limit, surplus requests will be buffered and must wait until enough capacity is free to execute the requests.
+
 We configure InferenceService with annotation autoscaling.knative.dev/target for a soft limit. The soft limit is a targeted limit rather than a strictly enforced bound, particularly if there is a sudden burst of requests, this value can be exceeded.
+
 I deployed `triton.yaml` on EKS cluster to explore the Autoscaling and I used `hey` to send loads.
 
 ```yaml
@@ -265,16 +343,16 @@ hey -m POST -z 60s -D ./triton_sample.json -host triton-gpu.default.example.com 
 ### Execution Results
 
 - Before the “Hey” Execution - Single pod of transformer and predictor is live.
-![kserve](/posts/202201119/as1.jpeg){: width="616" height="557"}
+![kserve](/posts/202201119/as1.png){: width="616" height="557"}
 
 - After 2 Seconds - pods are warming up
-![kserve](/posts/202201119/as2.jpeg){: width="616" height="557"}
+![kserve](/posts/202201119/as2.png){: width="616" height="557"}
 
 - After 30 Seconds - pods are running
-![kserve](/posts/202201119/as3.jpeg){: width="616" height="557"}
+![kserve](/posts/202201119/as3.png){: width="616" height="557"}
 
 - After 70 Seconds - bomberding done. pods are dying
-![kserve](/posts/202201119/as4.jpeg){: width="616" height="557"}
+![kserve](/posts/202201119/as4.png){: width="616" height="557"}
 
 - After 90 Seconds - back square 1
-![kserve](/posts/202201119/as5.jpeg){: width="616" height="557"}
+![kserve](/posts/202201119/as5.png){: width="616" height="557"}
