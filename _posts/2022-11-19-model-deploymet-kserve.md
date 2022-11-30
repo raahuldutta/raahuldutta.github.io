@@ -353,6 +353,8 @@ This image is not related with Kserve - Got the picture from reddit, its not an 
 Canary rollout is a deployment strategy when you can release a new version of model to a small percent of the production traffic.
 Lets deploy the below yaml files on your cluster with the new version.
 
+The below yaml file(`torchserve.yaml`) deploy the production model.
+
 ```yaml
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
@@ -367,6 +369,9 @@ spec:
       storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2
 ```
 
+Now if you want to deploy the newly created model with 20% random traffic.(`torchserve_canary.yaml`)
+
+```yaml
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
 metadata:
@@ -379,9 +384,18 @@ spec:
         name: pytorch
       protocolVersion: v2  
       storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v2
+```
 
+Kubectl
 
+```bash
+kubectl apply -f torchserve.yaml
+kubectl apply -f torchserve_canary.yaml
+```
 
+Expected Output
+
+```bash
 kubectl get revisions -l serving.kserve.io/inferenceservice=torchserve
 NAME                                 CONFIG NAME                    K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
 torchserve-predictor-default-00001   torchserve-predictor-default                      1            True             1                 1
@@ -391,12 +405,21 @@ kubectl get pods -l serving.kserve.io/inferenceservice=torchserve
 NAME                                                             READY   STATUS    RESTARTS   AGE
 torchserve-predictor-default-00001-deployment-7d99979c99-p49gk   2/2     Running   0          28m
 torchserve-predictor-default-00002-deployment-c6fcc65dd-rjknq    2/2     Running   0          3m37s
+```
 
+### Check Traffic Status
 
+After the canary model is rolled out, the traffic should be split between the canary model revision and the "stable" revision which was rolled out with 100% percent traffic, now check the traffic split from the InferenceServicetraffic status. Run the following curl requests a few times to the InferenceService, you can see that requests are sent to the two revisions with 20/80 splits.
+
+```bash
 SERVICE_HOSTNAME=$(kubectl get inferenceservice torchserve -o jsonpath='{.status.url}' | cut -d "/" -f 3)
 CLUSTER_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 for i in {1..10}; do curl -H "Host: ${SERVICE_HOSTNAME}" http://${CLUSTER_IP}/v2/models/mnist/infer -d @./canary_input.json; done
+```
 
+Expected Output
+
+```bash
 {"predictions": [2]}Handling connection for 8080
 {"predictions": [2]}Handling connection for 8080
 {"predictions": [2]}Handling connection for 8080
@@ -407,6 +430,7 @@ for i in {1..10}; do curl -H "Host: ${SERVICE_HOSTNAME}" http://${CLUSTER_IP}/v2
 {"predictions": [2]}Handling connection for 8080
 {"predictions": [2]}Handling connection for 8080
 {"predictions": [2]}Handling connection for 8080
+```
 
 ## Logging
 
@@ -433,11 +457,27 @@ spec:
       storageUri: pvc://task-pv-claim/models
 ```
 
+### Prometheus Graph View
+
+- Navigate to the Prometheus page
+- Add a query to the Prometheus page.
+- Search for `ts_inference_latency_microseconds`
+
+#### Prometheus Installaion
+
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus prometheus-community/prometheus
 kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-npkubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np
 ```
+
+### Grafana dashboard
+
+- Navigate to grafana page
+- Add a dashboard from the top left + symbol
+- Click add query and enter the query
+
+#### Grafana Installaion
 
 ```bash
 helm repo add grafana https://grafana.github.io/helm-charts
