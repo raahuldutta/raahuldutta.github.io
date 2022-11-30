@@ -125,10 +125,12 @@ model_snapshot={"name":"startup.cfg","modelCount":1,"models":{"BERTSeqClassifica
 
 The KServe/TorchServe integration expects following model store layout on the storage with TorchServe Model Archive and Model Configuration.
 
+```bash
 ├── config
 │   ├── config.properties
 ├── model-store
 │   ├── BERTSeqClassification.mar
+```
 
 ### Let's Run Our First Inference
 
