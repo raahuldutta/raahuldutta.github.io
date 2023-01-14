@@ -25,7 +25,7 @@ description: >-                        # used by seo meta and the atom feed
   This is Musings on AI, a newsletter about I post weekly newsletters on the hottest Musings on Artificial Intelligence.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://musingsoai.github.io'
+url: 'https://raahulrahl.github.io'
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
 baseurl: ''
